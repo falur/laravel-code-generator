@@ -158,20 +158,20 @@ You will get 3 file with migration, model, moonshine resource**
 # TODO
 
 ## TODO Command
--[ ] Create file of scheme
+- [ ] Create file of scheme
 
 ## TODO Fields
--[ ] Enum
--[ ] Select
--[ ] Default Image for Moonshine
--[ ] Default File for Moonshine
--[ ] Morph Fields
+- [ ] Enum
+- [ ] Select
+- [ ] Default Image for Moonshine
+- [ ] Default File for Moonshine
+- [ ] Morph Fields
 
 ## TODO Plugins
 
--[ ] Policies
--[ ] Factories
--[ ] Api Resources
--[ ] Request
--[ ] CRUD Actions with CRUD DTO
--[ ] CRUD Controllers
+- [ ] Policies
+- [ ] Factories
+- [ ] Api Resources
+- [ ] Request
+- [ ] CRUD Actions with CRUD DTO
+- [ ] CRUD Controllers
