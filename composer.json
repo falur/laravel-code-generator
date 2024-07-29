@@ -3,8 +3,8 @@
     "type": "library",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/falur/moonshine-file/issues",
-        "source": "https://github.com/falur/moonshine-file"
+        "issues": "https://github.com/falur/laravel-code-generator/issues",
+        "source": "https://github.com/falur/laravel-code-generator"
     },
     "authors": [
         {
