@@ -13,5 +13,15 @@ use GianTiaga\CodeGenerator\Types\ArgumentTypes\Str;
 
 class BelongsTo extends AbstractRelation
 {
+    public function getName(): ?string
+    {
+        if ($this->name) {
+            return \str($this->name)
+                ->snake()
+                ->append('_id')
+                ->toString();
+        }
 
+        return null;
+    }
 }

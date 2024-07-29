@@ -8,34 +8,49 @@ final readonly class ClassFormatter
 {
     public static function getClassNameFromTableName(string $tableName): string
     {
-        return (string) \str($tableName)
+        return \str($tableName)
             ->singular()
             ->camel()
-            ->ucfirst();
+            ->ucfirst()
+            ->toString();
     }
 
-    public static function getBelongsToClassNameFromFieldName(string $field): string
+    public static function getRelatedModelNameFromFieldName(string $field): string
     {
-        return (string) \str($field)
+        return \str($field)
             ->replace('_id', '')
             ->camel()
-            ->ucfirst();
+            ->singular()
+            ->ucfirst()
+            ->toString();
     }
 
     public static function getBelongsToMethodNameFromFieldName(string $field): string
     {
-        return (string) \str($field)
+        return \str($field)
             ->replace('_id', '')
-            ->camel();
+            ->camel()
+            ->toString();
+    }
+
+    public static function getShortRelationNameFromFieldName(string $field): string
+    {
+        return \str($field)
+            ->replace('_id', '')
+            ->camel()
+            ->ucfirst()
+            ->append('::class')
+            ->toString();
     }
 
     public static function getFullRelationNameFromFieldName(string $field): string
     {
-        return (string) \str($field)
+        return \str($field)
             ->replace('_id', '')
             ->camel()
             ->ucfirst()
             ->prepend('App\\Models\\')
-            ->append('::class');
+            ->append('::class')
+            ->toString();
     }
 }

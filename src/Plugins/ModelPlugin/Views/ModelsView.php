@@ -56,8 +56,10 @@ class ModelsView implements ViewInterface
             $modelBuilder->getImplements(),
             $modelBuilder->getUses(),
         );
+        $classes = array_filter($classes);
 
         $result = [];
+
         foreach ($classes as $class) {
             $result[] = 'use ' . $class->name . ($class->as ? ' as ' . $class->as : '') . ';';
         }

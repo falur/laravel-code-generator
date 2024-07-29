@@ -112,6 +112,34 @@ class MoonshineView implements ViewInterface
         return implode("\n", $result);
     }
 
+    public function filters(): string
+    {
+        $result = [];
+
+        foreach ($this->columns as $column) {
+            if (!$column->column->isInMoonshineResource() || !$column->column->isFilterable()) {
+                continue;
+            }
+
+            $result[] = RendererHelper::renderCallMethod(
+                object: class_basename($column->moonshineColumnBuilder->getMoonshineField()),
+                method: new MethodDto('make', $column->column->getName() ? [
+                    ArgumentDto::string($column->column->getLabel()),
+                    ArgumentDto::string($column->column->getName()),
+                    $this->getRelatedResource($column),
+                ] : null),
+                callKind: '::',
+                finishSymbol: ',',
+            );
+        }
+
+        if (!$result) {
+            return '';
+        }
+
+        return implode("\n", $result);
+    }
+
     public function model(): string
     {
         return ClassFormatter::getClassNameFromTableName($this->tableBuilder->getName());

@@ -10,6 +10,7 @@ use GianTiaga\CodeGenerator\Traits\HasExtends;
 use GianTiaga\CodeGenerator\Traits\HasImplements;
 use GianTiaga\CodeGenerator\Traits\HasUses;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class ModelBuilder extends AbstractBuilder
 {
@@ -20,6 +21,7 @@ class ModelBuilder extends AbstractBuilder
     protected function afterMake(): void
     {
         parent::afterMake();
+        $this->setExtends(new ClassNameDto(Model::class));
         $this->addUse(new ClassNameDto(HasFactory::class));
     }
 

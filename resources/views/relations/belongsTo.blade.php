@@ -2,7 +2,9 @@
 @php
     /** @var \GianTiaga\CodeGenerator\Plugins\ModelPlugin\Views\ModelsView $view */
     /** @var \GianTiaga\CodeGenerator\Plugins\ModelPlugin\Dto\ModelColumnDto $column */
-    $className = ClassFormatter::getBelongsToClassNameFromFieldName($column->column->getName());
+    /** @var \GianTiaga\CodeGenerator\Columns\Relations\AbstractRelation $relationColumn */
+    $relationColumn = $column->column;
+    $className = $relationColumn->getRelatedModel();
     $methodName = ClassFormatter::getBelongsToMethodNameFromFieldName($column->column->getName());
 @endphp
 /**

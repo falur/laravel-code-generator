@@ -196,6 +196,9 @@ class MigrationPlugin extends AbstractPlugin
                     $table = collect([$field1, $field2])
                         ->sort()
                         ->implode('_');
+                    $table = \str($table)
+                        ->snake('_')
+                        ->toString();
 
                     CodeGenerator::make()
                         ->registerPlugins([

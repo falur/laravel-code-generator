@@ -76,4 +76,14 @@ class {!! $view->model() !!}Resource extends ModelResource
             {!! $view->searches() !!}
         ];
     }
+
+    /**
+     * @return list<MoonShineComponent|Field>
+     */
+    public function filters(): array
+    {
+        return [
+            {!! $view->filters() !!}
+        ];
+    }
 }

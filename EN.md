@@ -1,19 +1,10 @@
-[EN Version](EN.md)
+# Install
+`composer require gian_tiaga/code-generator`
 
-# Мотивация
-На гитхабе есть несколько хороших генераторов кода, но все они не устроили по нескольким причинам, вот что есть в этом пакете чего нет в других:
-1. 1 раз описываем схему из которой формируются разные сущности
-2. Расширяемость плагинами, можно написать свои плагины и из той же схемы генерировать ваши данные
-3. Схема описывается через вызовы нужных классов, в отличии от json вам не нужно помнить какие возможности есть
-4. Для генераторов используются привычные blade шаблоны, что даёт большию гибкость чем привычные stub файлы
+# How to use
+1. Create files with scheme in any directory
 
-# Установка
-`composer require gian_tiaga/code-generator` 
-
-# Как использовать
-1. Создать директорию с файлами описывающие ваши сущности
-
-Пример:
+example:
 `app/CodeGenerator/1000_users.php`
 ```php
 <?php
@@ -108,9 +99,9 @@ return TableBuilder::make('users', 'Пользователи')
 
 ```
 
-2. Создать консольную команду для выполнения генерации
+2. Create Command for handle
 
-Пример 
+example
 ```php
 <?php
 
@@ -161,10 +152,8 @@ class GenerateCode extends Command
 
 ```
 
-В результате этого кода мы получаем 3 файла
-1. Миграция
-2. Модель
-3. Moonshine Resource
+**Result:
+You will get 3 file with migration, model, moonshine resource**
 
 # TODO
 
