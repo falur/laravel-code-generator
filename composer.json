@@ -1,0 +1,31 @@
+{
+    "name": "gian_tiaga/code-generator",
+    "type": "library",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/falur/moonshine-file/issues",
+        "source": "https://github.com/falur/moonshine-file"
+    },
+    "authors": [
+        {
+            "name": "Enakaev Ildar",
+            "email": "ienakaev@ya.ru",
+            "homepage": "https://ildar.yoga"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "GianTiaga\\CodeGenerator\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GianTiaga\\CodeGenerator\\Providers\\CodeGeneratorServiceProvider"
+            ]
+        }
+    }
+}
