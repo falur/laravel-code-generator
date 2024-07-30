@@ -12,6 +12,5 @@ final readonly class MoonshineColumnDto
     public function __construct(
         public AbstractColumn $column,
         public MoonshineColumnBuilder $moonshineColumnBuilder,
-    ) {
-    }
+    ) {}
 }

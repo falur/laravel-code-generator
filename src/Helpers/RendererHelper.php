@@ -20,9 +20,8 @@ use GianTiaga\CodeGenerator\Dto\MethodDto;
 final readonly class RendererHelper
 {
     /**
-     * @param string $object
-     * @param MethodDto $action
-     * @param MethodDto[] $fluent
+     * @param  MethodDto  $action
+     * @param  MethodDto[]  $fluent
      * @return void
      */
     public static function renderCallMethod(
@@ -32,7 +31,7 @@ final readonly class RendererHelper
         string $callKind = '->',
         string $finishSymbol = ';',
     ): string {
-        return sprintf("%s{$callKind}%s(%s)%s" . $finishSymbol,
+        return sprintf("%s{$callKind}%s(%s)%s".$finishSymbol,
             $object,
             $method->name,
             self::renderFunctionArguments($method->args),
@@ -41,18 +40,17 @@ final readonly class RendererHelper
     }
 
     /**
-     * @param ?ArgumentDto[] $args
-     * @return string
+     * @param  ?ArgumentDto[]  $args
      */
     public static function renderFunctionArguments(?array $args): string
     {
-        if (!$args) {
+        if (! $args) {
             return '';
         }
 
         $result = [];
         foreach ($args as $arg) {
-            if (!$arg) {
+            if (! $arg) {
                 continue;
             }
             $result[] = $arg->value;
@@ -62,8 +60,7 @@ final readonly class RendererHelper
     }
 
     /**
-     * @param MethodDto[] $fluents
-     * @return string
+     * @param  MethodDto[]  $fluents
      */
     public static function renderFluent(array $fluents): string
     {
@@ -74,13 +71,12 @@ final readonly class RendererHelper
                 self::renderFunctionArguments($fluent->args),
             );
         }
+
         return $result;
     }
 
     /**
-     * @param mixed[] $array
-     * @param string|int|null $key
-     * @return string
+     * @param  mixed[]  $array
      */
     public function renderList(array $array, string|int|null $key = null): string
     {
@@ -89,12 +85,12 @@ final readonly class RendererHelper
             $result[] = $key ? data_get($item, $key) : $item;
         }
 
-        return implode(",\n", $result) . ",";
+        return implode(",\n", $result).',';
     }
 
     public static function renderRulesForColumn(AbstractColumn $column): string
     {
-        if (!$column->getName()) {
+        if (! $column->getName()) {
             return '';
         }
 
@@ -107,7 +103,7 @@ final readonly class RendererHelper
         }
 
         $result = "'{$column->getName()}' => [";
-        if ($column->isRequired() && !($column instanceof File || $column instanceof BelongsToMany || $column instanceof HasMany)) {
+        if ($column->isRequired() && ! ($column instanceof File || $column instanceof BelongsToMany || $column instanceof HasMany)) {
             $result .= "'required', ";
         }
         if ($column->isUnique()) {

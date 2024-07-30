@@ -16,6 +16,7 @@ trait HasFilterable
     public function setFilterable(bool $filterable): static
     {
         $this->filterable = $filterable;
+
         return $this;
     }
 

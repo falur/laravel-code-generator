@@ -15,14 +15,12 @@ use GianTiaga\CodeGenerator\Views\ViewInterface;
 class ModelsView implements ViewInterface
 {
     /**
-     * @param TableBuilder $tableBuilder
-     * @param ModelColumnDto[] $columns
+     * @param  ModelColumnDto[]  $columns
      */
     public function __construct(
         protected TableBuilder $tableBuilder,
         protected array $columns,
-    ) {
-    }
+    ) {}
 
     /**
      * @return MigrationColumnDto[]
@@ -32,9 +30,6 @@ class ModelsView implements ViewInterface
         return $this->columns;
     }
 
-    /**
-     * @return TableBuilder
-     */
     public function getTableBuilder(): TableBuilder
     {
         return $this->tableBuilder;
@@ -61,8 +56,9 @@ class ModelsView implements ViewInterface
         $result = [];
 
         foreach ($classes as $class) {
-            $result[] = 'use ' . $class->name . ($class->as ? ' as ' . $class->as : '') . ';';
+            $result[] = 'use '.$class->name.($class->as ? ' as '.$class->as : '').';';
         }
+
         return implode("\n", $result);
     }
 
@@ -70,8 +66,9 @@ class ModelsView implements ViewInterface
     {
         $result = [];
         foreach ($this->tableBuilder->getModelBuilder()->getUses() as $use) {
-            $result[] = 'use ' . class_basename($use->value()) . ';';
+            $result[] = 'use '.class_basename($use->value()).';';
         }
+
         return implode("\n", $result);
     }
 
@@ -81,7 +78,8 @@ class ModelsView implements ViewInterface
         foreach ($this->tableBuilder->getModelBuilder()->getImplements() as $implement) {
             $result[] = class_basename($implement->value());
         }
-        return $result ? ('implements ' . implode(",", $result)) : '';
+
+        return $result ? ('implements '.implode(',', $result)) : '';
     }
 
     public function extends(): string
@@ -89,7 +87,7 @@ class ModelsView implements ViewInterface
         $extends = $this->tableBuilder->getModelBuilder()->getExtends();
 
         if ($extends) {
-            return 'extends ' . class_basename($extends->value());
+            return 'extends '.class_basename($extends->value());
         }
 
         return '';
@@ -104,7 +102,7 @@ class ModelsView implements ViewInterface
             }
         }
 
-        return implode(",\n", $result) . ",";
+        return implode(",\n", $result).',';
     }
 
     public function casts(): string
@@ -114,10 +112,10 @@ class ModelsView implements ViewInterface
             $name = $column->column->getName();
             $cast = $column->modelColumnBuilder->getCast();
             if ($cast && $name) {
-                $result[] = new Str($column->column->getName()) . '=> ' . $cast;
+                $result[] = new Str($column->column->getName()).'=> '.$cast;
             }
         }
 
-        return $result ? implode(",\n", $result) . "," : '';
+        return $result ? implode(",\n", $result).',' : '';
     }
 }

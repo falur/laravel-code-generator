@@ -41,7 +41,7 @@ class ModelPlugin extends AbstractPlugin
     {
         foreach ($this->codeGenerator->getTables() as $table) {
             $modelBuilder = $table->getModelBuilder();
-            if (!$modelBuilder) {
+            if (! $modelBuilder) {
                 continue;
             }
 
@@ -65,9 +65,7 @@ class ModelPlugin extends AbstractPlugin
     }
 
     /**
-     * @param ModelColumnDto[] $columns
-     * @param TableBuilder $tableBuilder
-     * @return void
+     * @param  ModelColumnDto[]  $columns
      */
     public function before(array $columns, TableBuilder $tableBuilder): void
     {
@@ -77,9 +75,7 @@ class ModelPlugin extends AbstractPlugin
     }
 
     /**
-     * @param ModelColumnDto[] $columns
-     * @param TableBuilder $tableBuilder
-     * @return void
+     * @param  ModelColumnDto[]  $columns
      */
     public function after(array $columns, TableBuilder $tableBuilder): void
     {
@@ -88,17 +84,12 @@ class ModelPlugin extends AbstractPlugin
         }
     }
 
-    /**
-     * @param TableBuilder $tableBuilder
-     * @return string
-     */
     public function getModelFileName(TableBuilder $tableBuilder): string
     {
-        return ClassFormatter::getClassNameFromTableName($tableBuilder->getName()) . '.php';
+        return ClassFormatter::getClassNameFromTableName($tableBuilder->getName()).'.php';
     }
 
     /**
-     * @param TableBuilder $tableBuilder
      * @return ModelColumnDto[]
      */
     protected function makeColumnsFromTable(TableBuilder $tableBuilder): array
@@ -107,7 +98,7 @@ class ModelPlugin extends AbstractPlugin
 
         foreach ($tableBuilder->getColumns() as $column) {
             $columnBuilder = $this->getColumnBuilderByColumn($column);
-            if (!$column->isInModel() || !$columnBuilder) {
+            if (! $column->isInModel() || ! $columnBuilder) {
                 continue;
             }
 
@@ -117,10 +108,6 @@ class ModelPlugin extends AbstractPlugin
         return $columns;
     }
 
-    /**
-     * @param AbstractColumn $column
-     * @return ModelColumnBuilder|null
-     */
     protected function getColumnBuilderByColumn(AbstractColumn $column): ?ModelColumnBuilder
     {
         return match ($column::class) {
@@ -138,31 +125,27 @@ class ModelPlugin extends AbstractPlugin
             Phone::class,
             Slug::class,
             TextArea::class,
-            WYSIWYG::class
-                => ModelColumnBuilder::makeFromColumn($column),
+            WYSIWYG::class => ModelColumnBuilder::makeFromColumn($column),
 
             Number::class,
-            BelongsTo::class
-                => ModelColumnBuilder::makeFromColumn($column)
-                    ->setCast(new Str('int')),
+            BelongsTo::class => ModelColumnBuilder::makeFromColumn($column)
+                ->setCast(new Str('int')),
 
-            DateTime::class
-                => ModelColumnBuilder::makeFromColumn($column)
-                    ->setCast(new Str('immutable_datetime')),
+            DateTime::class => ModelColumnBuilder::makeFromColumn($column)
+                ->setCast(new Str('immutable_datetime')),
 
             Json::class => ModelColumnBuilder::makeFromColumn($column)
                 ->setCast(new Str('array')),
 
             HasMany::class,
-            BelongsToMany::class
-                => ModelColumnBuilder::make()
-                    ->setFillable(false),
+            BelongsToMany::class => ModelColumnBuilder::make()
+                ->setFillable(false),
 
             Timestamps::class => ModelColumnBuilder::makeFromColumn($column)
                 ->setFillableColumn(
                     implode(",\n", [
                         new Str('updated_at'),
-                        new Str('created_at')
+                        new Str('created_at'),
                     ]),
                 ),
 

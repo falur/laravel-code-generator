@@ -14,39 +14,36 @@ use GianTiaga\CodeGenerator\Helpers\RendererHelper;
 use GianTiaga\CodeGenerator\Plugins\MoonshinePlugin\Dto\MoonshineColumnDto;
 use GianTiaga\CodeGenerator\Types\ArgumentTypes\Str;
 use GianTiaga\CodeGenerator\Views\ViewInterface;
-use MoonShine\Fields\Relationships\ModelRelationField;
 
 class MoonshineView implements ViewInterface
 {
     /**
-     * @param TableBuilder $tableBuilder
-     * @param MoonshineColumnDto[] $columns
+     * @param  MoonshineColumnDto[]  $columns
      */
     public function __construct(
         protected TableBuilder $tableBuilder,
         protected array $columns,
-    ) {
-    }
+    ) {}
 
     public function imports(): string
     {
         $result = [];
         foreach ($this->columns as $column) {
-            $result[$column->moonshineColumnBuilder->getMoonshineField()] = 'use ' . $column->moonshineColumnBuilder->getMoonshineField();
+            $result[$column->moonshineColumnBuilder->getMoonshineField()] = 'use '.$column->moonshineColumnBuilder->getMoonshineField();
         }
 
-        if (!$result) {
+        if (! $result) {
             return '';
         }
 
-        return implode(";\n", $result) . ';';
+        return implode(";\n", $result).';';
     }
 
     public function searches(): string
     {
         $result = [];
         foreach ($this->columns as $column) {
-            if (!$column->column->isInMoonshineResource()) {
+            if (! $column->column->isInMoonshineResource()) {
                 continue;
             }
 
@@ -55,28 +52,28 @@ class MoonshineView implements ViewInterface
             }
         }
 
-        if (!$result) {
+        if (! $result) {
             return '';
         }
 
-        return implode(",\n", $result) . ',';
+        return implode(",\n", $result).',';
     }
 
     public function rules(): string
     {
         $result = [];
         foreach ($this->columns as $column) {
-            if (!$column->column->isInMoonshineResource()) {
+            if (! $column->column->isInMoonshineResource()) {
                 continue;
             }
 
-            $val =  RendererHelper::renderRulesForColumn($column->column);
+            $val = RendererHelper::renderRulesForColumn($column->column);
             if ($val) {
                 $result[] = $val;
             }
         }
 
-        if (!$result) {
+        if (! $result) {
             return '';
         }
 
@@ -88,24 +85,26 @@ class MoonshineView implements ViewInterface
         $result = [];
 
         foreach ($this->columns as $column) {
-            if (!$column->column->isInMoonshineResource()) {
+            if (! $column->column->isInMoonshineResource()
+                || ! $column->moonshineColumnBuilder->getMoonshineField()
+            ) {
                 continue;
             }
 
             $result[] = RendererHelper::renderCallMethod(
                 class_basename($column->moonshineColumnBuilder->getMoonshineField()),
-                new MethodDto('make', $column->column->getName() ? [
+                new MethodDto('make', $column->column->getName() ? array_filter([
                     ArgumentDto::string($column->column->getLabel()),
                     ArgumentDto::string($column->column->getName()),
                     $this->getRelatedResource($column),
-                ] : null),
+                ]) : null),
                 $column->moonshineColumnBuilder->getFluent(),
                 '::',
                 ',',
             );
         }
 
-        if (!$result) {
+        if (! $result) {
             return '';
         }
 
@@ -117,23 +116,26 @@ class MoonshineView implements ViewInterface
         $result = [];
 
         foreach ($this->columns as $column) {
-            if (!$column->column->isInMoonshineResource() || !$column->column->isFilterable()) {
+            if (! $column->column->isInMoonshineResource()
+                || ! $column->column->isFilterable()
+                || ! $column->moonshineColumnBuilder->getMoonshineField()
+            ) {
                 continue;
             }
 
             $result[] = RendererHelper::renderCallMethod(
                 object: class_basename($column->moonshineColumnBuilder->getMoonshineField()),
-                method: new MethodDto('make', $column->column->getName() ? [
+                method: new MethodDto('make', $column->column->getName() ? array_filter([
                     ArgumentDto::string($column->column->getLabel()),
                     ArgumentDto::string($column->column->getName()),
                     $this->getRelatedResource($column),
-                ] : null),
+                ]) : null),
                 callKind: '::',
                 finishSymbol: ',',
             );
         }
 
-        if (!$result) {
+        if (! $result) {
             return '';
         }
 
@@ -142,7 +144,10 @@ class MoonshineView implements ViewInterface
 
     public function model(): string
     {
-        return ClassFormatter::getClassNameFromTableName($this->tableBuilder->getName());
+        /** @var string $name */
+        $name = $this->tableBuilder->getName();
+
+        return ClassFormatter::getClassNameFromTableName($name);
     }
 
     public function label(): string
@@ -153,8 +158,11 @@ class MoonshineView implements ViewInterface
     private function getRelatedResource(MoonshineColumnDto $column): ?ArgumentDto
     {
         if ($column->column instanceof HasMany || $column->column instanceof BelongsToMany) {
+            /** @var string $name */
+            $name = $column->column->getName();
+
             return ArgumentDto::any(
-                \str(ClassFormatter::getClassNameFromTableName($column->column->getName()))
+                \str(ClassFormatter::getClassNameFromTableName($name))
                     ->append('Resource::class')
                     ->toString(),
             );

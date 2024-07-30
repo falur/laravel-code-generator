@@ -20,7 +20,7 @@ trait HasEventsBefore
     }
 
     /**
-     * @param \Closure[] $events
+     * @param  \Closure[]  $events
      * @return $this
      */
     public function setEventsBefore(array $events): static
@@ -37,7 +37,7 @@ trait HasEventsBefore
         return $this;
     }
 
-    public function fireEventsBefore(...$arguments): static
+    public function fireEventsBefore(mixed ...$arguments): static
     {
         foreach ($this->eventsBefore as $closure) {
             $closure(...$arguments);

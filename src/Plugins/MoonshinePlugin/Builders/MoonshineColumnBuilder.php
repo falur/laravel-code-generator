@@ -8,22 +8,20 @@ use GianTiaga\CodeGenerator\Columns\AbstractColumn;
 use GianTiaga\CodeGenerator\Dto\ArgumentDto;
 use GianTiaga\CodeGenerator\Dto\MethodDto;
 use GianTiaga\CodeGenerator\Traits\HasDefaultValue;
-use GianTiaga\CodeGenerator\Traits\HasFillable;
 use GianTiaga\CodeGenerator\Traits\HasFluent;
 use GianTiaga\CodeGenerator\Traits\HasRequired;
 use GianTiaga\CodeGenerator\Traits\HasSearchable;
 use GianTiaga\CodeGenerator\Traits\HasSortable;
 use GianTiaga\CodeGenerator\Traits\Makeable;
-use GianTiaga\CodeGenerator\Types\ArgumentTypes\Str;
 
 class MoonshineColumnBuilder
 {
-    use Makeable;
-    use HasRequired;
-    use HasSortable;
-    use HasSearchable;
     use HasDefaultValue;
     use HasFluent;
+    use HasRequired;
+    use HasSearchable;
+    use HasSortable;
+    use Makeable;
 
     protected ?string $moonshineField = null;
 
@@ -39,9 +37,9 @@ class MoonshineColumnBuilder
                 new MethodDto('sortable')
             )
             ->addFluentWhen(
-                (bool)$column->getDefaultValue(),
+                (bool) $column->getDefaultValue(),
                 new MethodDto('default', [
-                    ArgumentDto::any($column->getDefaultValue())
+                    ArgumentDto::any($column->getDefaultValue()),
                 ]),
             )
             ->setRequired($column->isRequired())

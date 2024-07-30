@@ -7,12 +7,11 @@ namespace GianTiaga\CodeGenerator\Types\ArgumentTypes;
 final readonly class Str implements ArgumentTypeInterface
 {
     public function __construct(
-        public string $value
-    ) {
-    }
+        public ?string $value
+    ) {}
 
     public function __toString(): string
     {
-        return \Illuminate\Support\Str::wrap($this->value, "'");
+        return \Illuminate\Support\Str::wrap((string)$this->value, "'");
     }
 }

@@ -25,6 +25,7 @@ trait HasMoonshineFieldClass
     public function setMoonshineFieldClass(?string $moonshineFieldClass): static
     {
         $this->moonshineFieldClass = $moonshineFieldClass;
+
         return $this;
     }
 }

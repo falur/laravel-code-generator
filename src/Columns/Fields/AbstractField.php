@@ -6,7 +6,4 @@ namespace GianTiaga\CodeGenerator\Columns\Fields;
 
 use GianTiaga\CodeGenerator\Columns\AbstractColumn;
 
-abstract class AbstractField extends AbstractColumn
-{
-
-}
+abstract class AbstractField extends AbstractColumn {}

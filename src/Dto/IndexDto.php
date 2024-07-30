@@ -7,12 +7,10 @@ namespace GianTiaga\CodeGenerator\Dto;
 final readonly class IndexDto
 {
     /**
-     * @param string[] $fields
-     * @param string|null $name
+     * @param  string[]  $fields
      */
     public function __construct(
         public array $fields,
         public ?string $name = null,
-    ) {
-    }
+    ) {}
 }

@@ -22,13 +22,10 @@ class CodeGenerator
      */
     protected array $tables = [];
 
-    /**
-     * @var string|null
-     */
     protected ?string $directory = null;
 
     /**
-     * @param TableBuilder[] $tables
+     * @param  TableBuilder[]  $tables
      */
     protected function __construct(array $tables = [])
     {
@@ -42,7 +39,7 @@ class CodeGenerator
     {
         if ($this->directory) {
             foreach (new DirectoryIterator($this->directory) as $file) {
-                if (!$file->isFile() || $file->getExtension() !== 'php') {
+                if (! $file->isFile() || $file->getExtension() !== 'php') {
                     continue;
                 }
 
@@ -55,7 +52,7 @@ class CodeGenerator
     }
 
     /**
-     * @param TableBuilder[] $tables
+     * @param  TableBuilder[]  $tables
      * @return $this
      */
     public function setTables(array $tables): static
@@ -66,7 +63,6 @@ class CodeGenerator
     }
 
     /**
-     * @param string|null $dir
      * @return $this
      */
     public function setTablesFromDir(?string $dir): static
@@ -77,7 +73,6 @@ class CodeGenerator
     }
 
     /**
-     * @param TableBuilder $table
      * @return $this
      */
     public function addTable(TableBuilder $table): static
@@ -96,7 +91,7 @@ class CodeGenerator
     }
 
     /**
-     * @param PluginInterface[] $plugins
+     * @param  PluginInterface[]  $plugins
      * @return $this
      */
     public function registerPlugins(array $plugins): static
@@ -110,9 +105,6 @@ class CodeGenerator
         return $this;
     }
 
-    /**
-     * @return void
-     */
     public function generate(): void
     {
         foreach ($this->plugins as $plugin) {

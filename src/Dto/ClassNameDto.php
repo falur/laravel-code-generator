@@ -9,8 +9,7 @@ final readonly class ClassNameDto
     public function __construct(
         public string $name,
         public ?string $as = null,
-    ) {
-    }
+    ) {}
 
     public function value(): string
     {

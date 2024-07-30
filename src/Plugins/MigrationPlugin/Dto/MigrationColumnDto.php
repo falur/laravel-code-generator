@@ -12,6 +12,5 @@ readonly class MigrationColumnDto
     public function __construct(
         public AbstractColumn $column,
         public MigrationColumnBuilder $migrationColumnBuilder,
-    ) {
-    }
+    ) {}
 }

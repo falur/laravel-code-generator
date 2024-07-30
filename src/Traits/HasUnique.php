@@ -16,6 +16,7 @@ trait HasUnique
     public function setUnique(bool $unique): static
     {
         $this->unique = $unique;
+
         return $this;
     }
 

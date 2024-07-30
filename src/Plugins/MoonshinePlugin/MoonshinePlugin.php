@@ -43,7 +43,7 @@ class MoonshinePlugin extends AbstractPlugin
         foreach ($this->codeGenerator->getTables() as $table) {
             $moonshineBuilder = $table->getMoonshineBuilder();
 
-            if (!$moonshineBuilder) {
+            if (! $moonshineBuilder) {
                 continue;
             }
 
@@ -77,7 +77,7 @@ class MoonshinePlugin extends AbstractPlugin
 
         foreach ($table->getColumns() as $column) {
             $columnBuilder = $this->getColumnBuilderByColumn($column);
-            if (!$column->isInMoonshineResource() || !$columnBuilder) {
+            if (! $column->isInMoonshineResource() || ! $columnBuilder) {
                 continue;
             }
 
@@ -88,7 +88,6 @@ class MoonshinePlugin extends AbstractPlugin
     }
 
     /**
-     * @param AbstractColumn $column
      * @return ModelColumnBuilder|null
      */
     protected function getColumnBuilderByColumn(AbstractColumn $column): ?MoonshineColumnBuilder

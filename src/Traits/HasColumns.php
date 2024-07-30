@@ -22,7 +22,7 @@ trait HasColumns
     }
 
     /**
-     * @param AbstractColumn[] $columns
+     * @param  AbstractColumn[]  $columns
      * @return $this
      */
     public function setColumns(array $columns): static
@@ -33,7 +33,7 @@ trait HasColumns
     }
 
     /**
-     * @param AbstractColumn $unique
+     * @param  AbstractColumn  $column
      * @return $this
      */
     public function addColumn(AbstractColumn $column): static

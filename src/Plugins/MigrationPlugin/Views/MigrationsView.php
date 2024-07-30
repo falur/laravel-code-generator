@@ -15,26 +15,18 @@ use Illuminate\Support\Arr;
 class MigrationsView implements ViewInterface
 {
     /**
-     * @param TableBuilder $tableBuilder
-     * @param MigrationColumnDto[] $columns
+     * @param  MigrationColumnDto[]  $columns
      */
     public function __construct(
         protected TableBuilder $tableBuilder,
         protected array $columns,
-    ) {
-    }
+    ) {}
 
-    /**
-     * @return string
-     */
     public function tableName(): string
     {
         return $this->tableBuilder->getName();
     }
 
-    /**
-     * @return string
-     */
     public function columns(): string
     {
         $result = '';
@@ -51,15 +43,11 @@ class MigrationsView implements ViewInterface
         return trim($result);
     }
 
-    /**
-     * @param MigrationColumnDto $column
-     * @return string|null
-     */
     public function column(MigrationColumnDto $column): ?string
     {
         $migrationColumnBuilder = $column->migrationColumnBuilder;
 
-        if (!$migrationColumnBuilder->getMethod()) {
+        if (! $migrationColumnBuilder->getMethod()) {
             return null;
         }
 
@@ -70,9 +58,6 @@ class MigrationsView implements ViewInterface
         );
     }
 
-    /**
-     * @return string
-     */
     public function indexes(): string
     {
         $result = '';
@@ -93,9 +78,6 @@ class MigrationsView implements ViewInterface
         return $result;
     }
 
-    /**
-     * @return string
-     */
     public function uniques(): string
     {
         $result = '';
@@ -116,9 +98,6 @@ class MigrationsView implements ViewInterface
         return $result;
     }
 
-    /**
-     * @return TableBuilder
-     */
     public function getTableBuilder(): TableBuilder
     {
         return $this->tableBuilder;

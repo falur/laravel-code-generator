@@ -9,23 +9,19 @@ use GianTiaga\CodeGenerator\Views\ViewInterface;
 
 class Renderer
 {
-    /**
-     * @param ViewInterface $view
-     * @param ?AbstractBuilder $builder
-     */
     public function __construct(
         protected ViewInterface $view,
         protected ?AbstractBuilder $builder,
-    ) {
-    }
+    ) {}
 
     /**
      * @return ?string
+     *
      * @throws \Throwable
      */
     public function render(): ?string
     {
-        if (!$this->builder) {
+        if (! $this->builder) {
             return null;
         }
 
@@ -35,22 +31,19 @@ class Renderer
     }
 
     /**
-     * @param string $filename
-     * @param bool $force
-     * @return void
      * @throws \Throwable
      */
     public function copyRendered(string $filename, bool $force = false): void
     {
         $rendered = $this->render();
 
-        if (!$rendered) {
+        if (! $rendered || ! $this->builder) {
             return;
         }
 
-        $filename = rtrim($this->builder->getDestination(), '/') . '/' . ltrim($filename, '/');
+        $filename = rtrim($this->builder->getDestination(), '/').'/'.ltrim($filename, '/');
 
-        if (!file_exists($filename) || $force) {
+        if (! file_exists($filename) || $force) {
             file_put_contents($filename, $rendered);
         }
     }

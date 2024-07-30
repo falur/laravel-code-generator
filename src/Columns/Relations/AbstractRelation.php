@@ -27,6 +27,7 @@ abstract class AbstractRelation extends AbstractColumn
     public function setRelatedModel(?string $relatedModel): AbstractRelation
     {
         $this->relatedModel = $relatedModel;
+
         return $this;
     }
 }

@@ -7,12 +7,11 @@ namespace GianTiaga\CodeGenerator\Types\ArgumentTypes;
 final readonly class Any implements ArgumentTypeInterface
 {
     public function __construct(
-        public mixed $value
-    ) {
-    }
+        public string|null|int|bool $value
+    ) {}
 
     public function __toString(): string
     {
-        return (string)$this->value;
+        return (string) $this->value;
     }
 }

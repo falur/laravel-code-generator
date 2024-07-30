@@ -16,6 +16,7 @@ trait HasSearchable
     public function setSearchable(bool $searchable): static
     {
         $this->searchable = $searchable;
+
         return $this;
     }
 

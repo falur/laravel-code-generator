@@ -22,7 +22,7 @@ trait HasUses
     }
 
     /**
-     * @param ClassNameDto[] $uses
+     * @param  ClassNameDto[]  $uses
      * @return $this
      */
     public function setUses(array $uses): static
@@ -33,7 +33,6 @@ trait HasUses
     }
 
     /**
-     * @param ClassNameDto $use
      * @return $this
      */
     public function addUse(ClassNameDto $use): static

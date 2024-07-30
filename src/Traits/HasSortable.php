@@ -16,6 +16,7 @@ trait HasSortable
     public function setSortable(bool $sortable): static
     {
         $this->sortable = $sortable;
+
         return $this;
     }
 

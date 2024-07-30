@@ -25,17 +25,11 @@ class ModelBuilder extends AbstractBuilder
         $this->addUse(new ClassNameDto(HasFactory::class));
     }
 
-    /**
-     * @return string
-     */
     protected function defaultDestination(): string
     {
         return app_path('Models');
     }
 
-    /**
-     * @return string
-     */
     protected function defaultFrom(): string
     {
         return 'gian-code-generator::model';

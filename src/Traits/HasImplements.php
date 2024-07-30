@@ -22,17 +22,17 @@ trait HasImplements
     }
 
     /**
-     * @param ClassNameDto[] $implements
+     * @param  ClassNameDto[]  $implements
      * @return $this
      */
     public function setImplements(array $implements): static
     {
         $this->implements = $implements;
+
         return $this;
     }
 
     /**
-     * @param ClassNameDto $implement
      * @return $this
      */
     public function addImplement(ClassNameDto $implement): static

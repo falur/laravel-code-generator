@@ -22,7 +22,7 @@ trait HasUniques
     }
 
     /**
-     * @param IndexDto[] $unique
+     * @param  IndexDto[]  $unique
      * @return $this
      */
     public function setUniques(array $unique): static
@@ -33,7 +33,6 @@ trait HasUniques
     }
 
     /**
-     * @param IndexDto $unique
      * @return $this
      */
     public function addToUniques(IndexDto $unique): static

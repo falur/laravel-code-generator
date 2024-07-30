@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GianTiaga\CodeGenerator\Builders;
 
-use GianTiaga\CodeGenerator\Columns\AbstractColumn;
 use GianTiaga\CodeGenerator\Helpers\ClassFormatter;
 use GianTiaga\CodeGenerator\Plugins\MigrationPlugin\Traits\HasMigrationBuilder;
 use GianTiaga\CodeGenerator\Plugins\ModelPlugin\Traits\HasModelBuilder;
@@ -13,25 +12,20 @@ use GianTiaga\CodeGenerator\Traits\HasColumns;
 use GianTiaga\CodeGenerator\Traits\HasLabel;
 use GianTiaga\CodeGenerator\Traits\HasName;
 use GianTiaga\CodeGenerator\Traits\Makeable;
-use Illuminate\Support\Str;
 
 class TableBuilder
 {
-    use Makeable;
-    use HasName;
-    use HasLabel;
     use HasColumns;
+    use HasLabel;
     use HasMigrationBuilder;
     use HasModelBuilder;
     use HasMoonshineBuilder;
+    use HasName;
+    use Makeable;
 
-    /**
-     * @param string $name
-     * @param ?string $label
-     */
     protected function __construct(
         string $name,
-        string $label = null,
+        ?string $label = null,
     ) {
         $this->setName($name);
         $this->setLabel($label);
@@ -39,6 +33,14 @@ class TableBuilder
 
     public function getLabel(): string
     {
-        return $this->label ?? ClassFormatter::getClassNameFromTableName($this->getName());
+        if ($this->label) {
+            return $this->label;
+        }
+
+        if ($this->getName()) {
+            return ClassFormatter::getClassNameFromTableName($this->getName());
+        }
+
+        return '';
     }
 }

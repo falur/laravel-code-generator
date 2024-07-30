@@ -14,10 +14,10 @@ use GianTiaga\CodeGenerator\Traits\Makeable;
 
 class MigrationColumnBuilder
 {
-    use Makeable;
     use HasEventAfter;
     use HasEventsBefore;
     use HasFluent;
+    use Makeable;
 
     /**
      * @var ?MethodDto
@@ -25,8 +25,8 @@ class MigrationColumnBuilder
     protected ?MethodDto $method = null;
 
     /**
-     * @param ?MethodDto $method
-     * @param MethodDto[] $fluent
+     * @param  ?MethodDto  $method
+     * @param  MethodDto[]  $fluent
      */
     protected function __construct(
         ?MethodDto $method = null,
@@ -36,11 +36,6 @@ class MigrationColumnBuilder
         $this->setFluent($fluent);
     }
 
-    /**
-     * @param string $mainMethod
-     * @param AbstractColumn $column
-     * @return MigrationColumnBuilder
-     */
     public static function makeFromColumn(
         string $mainMethod,
         AbstractColumn $column
@@ -51,7 +46,7 @@ class MigrationColumnBuilder
             ]),
         )
             ->addFluentWhen(
-                !$column->isRequired(),
+                ! $column->isRequired(),
                 new MethodDto('nullable')
             )
             ->addFluentWhen(
@@ -59,15 +54,15 @@ class MigrationColumnBuilder
                 new MethodDto('unique')
             )
             ->addFluentWhen(
-                (bool)$column->getDefaultValue(),
+                (bool) $column->getDefaultValue(),
                 new MethodDto('default', [
-                    ArgumentDto::any($column->getDefaultValue())
+                    ArgumentDto::any($column->getDefaultValue()),
                 ]),
             )
             ->addFluentWhen(
-                (bool)$column->getComment(),
+                (bool) $column->getComment(),
                 new MethodDto('comment', [
-                    ArgumentDto::string($column->getComment())
+                    ArgumentDto::string($column->getComment()),
                 ]),
             );
     }
@@ -81,7 +76,7 @@ class MigrationColumnBuilder
     }
 
     /**
-     * @param ?MethodDto $method
+     * @param  ?MethodDto  $method
      * @return $this
      */
     public function setMethod(?MethodDto $method): static

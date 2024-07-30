@@ -22,7 +22,7 @@ trait HasIndexes
     }
 
     /**
-     * @param IndexDto[] $indexes
+     * @param  IndexDto[]  $indexes
      * @return $this
      */
     public function setIndexes(array $indexes): static
@@ -33,7 +33,6 @@ trait HasIndexes
     }
 
     /**
-     * @param IndexDto $index
      * @return $this
      */
     public function addIndex(IndexDto $index): static

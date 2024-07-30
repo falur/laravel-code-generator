@@ -16,6 +16,7 @@ trait HasRequired
     public function setRequired(bool $required): static
     {
         $this->required = $required;
+
         return $this;
     }
 

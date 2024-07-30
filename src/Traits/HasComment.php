@@ -16,6 +16,7 @@ trait HasComment
     public function setComment(?string $comment): static
     {
         $this->comment = $comment;
+
         return $this;
     }
 }

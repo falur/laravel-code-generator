@@ -7,6 +7,7 @@ namespace GianTiaga\CodeGenerator\Traits;
 trait HasFillable
 {
     protected bool $fillable = true;
+
     protected ?string $fillableColumn = null;
 
     public function getFillableColumn(): ?string

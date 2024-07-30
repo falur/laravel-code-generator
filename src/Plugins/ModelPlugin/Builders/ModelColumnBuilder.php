@@ -14,11 +14,11 @@ use GianTiaga\CodeGenerator\Types\ArgumentTypes\Str;
 
 class ModelColumnBuilder
 {
-    use Makeable;
-    use HasFillable;
     use HasCast;
     use HasEventAfter;
     use HasEventsBefore;
+    use HasFillable;
+    use Makeable;
 
     public static function makeFromColumn(AbstractColumn $column): static
     {
@@ -26,7 +26,7 @@ class ModelColumnBuilder
             ->setFillable($column->isFillable())
             ->setFillableColumn(
                 $column->getName()
-                    ? (string)new Str($column->getName())
+                    ? (string) new Str($column->getName())
                     : null
             );
     }

@@ -22,7 +22,7 @@ trait HasFluent
     }
 
     /**
-     * @param MethodDto[] $fluent
+     * @param  MethodDto[]  $fluent
      * @return $this
      */
     public function setFluent(array $fluent): static
@@ -33,7 +33,6 @@ trait HasFluent
     }
 
     /**
-     * @param MethodDto $fluent
      * @return $this
      */
     public function addFluent(MethodDto $fluent): static
@@ -44,8 +43,6 @@ trait HasFluent
     }
 
     /**
-     * @param bool $bool
-     * @param MethodDto $fluent
      * @return $this
      */
     public function addFluentWhen(bool $bool, MethodDto $fluent): static

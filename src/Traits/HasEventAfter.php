@@ -20,7 +20,7 @@ trait HasEventAfter
     }
 
     /**
-     * @param \Closure[] $eventsAfter
+     * @param  \Closure[]  $eventsAfter
      * @return $this
      */
     public function setEventAfter(array $eventsAfter): static
@@ -37,7 +37,7 @@ trait HasEventAfter
         return $this;
     }
 
-    public function fireEventAfter(...$arguments): static
+    public function fireEventAfter(mixed ...$arguments): static
     {
         foreach ($this->eventsAfter as $closure) {
             $closure(...$arguments);

@@ -13,12 +13,10 @@ final readonly class ArgumentDto
 {
     public function __construct(
         public ArgumentTypeInterface $value
-    ) {
-    }
+    ) {}
 
     /**
-     * @param mixed[]|null $value
-     * @return self
+     * @param  mixed[]|null  $value
      */
     public static function array(?array $value): self
     {
@@ -27,16 +25,16 @@ final readonly class ArgumentDto
 
     public static function string(?string $value): self
     {
-        return new self(new Str((string)$value));
+        return new self(new Str((string) $value));
     }
 
-    public static function any(mixed $value): self
+    public static function any(bool|int|string|null $value): self
     {
         return new self(new Any($value));
     }
 
     public function __toString(): string
     {
-        return (string)$this->value;
+        return (string) $this->value;
     }
 }

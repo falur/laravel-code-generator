@@ -7,12 +7,10 @@ namespace GianTiaga\CodeGenerator\Dto;
 final readonly class MethodDto
 {
     /**
-     * @param string $name
-     * @param ?ArgumentDto[] $args
+     * @param  ?ArgumentDto[]  $args
      */
     public function __construct(
         public string $name,
         public ?array $args = null,
-    ) {
-    }
+    ) {}
 }

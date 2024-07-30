@@ -13,17 +13,11 @@ class MigrationBuilder extends AbstractBuilder
     use HasIndexes;
     use HasUniques;
 
-    /**
-     * @return string
-     */
     protected function defaultDestination(): string
     {
         return database_path('migrations');
     }
 
-    /**
-     * @return string
-     */
     protected function defaultFrom(): string
     {
         return 'gian-code-generator::migration';

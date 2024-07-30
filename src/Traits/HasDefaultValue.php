@@ -16,6 +16,7 @@ trait HasDefaultValue
     public function setDefaultValue(mixed $defaultValue): static
     {
         $this->defaultValue = $defaultValue;
+
         return $this;
     }
 }

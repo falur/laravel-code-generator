@@ -34,7 +34,6 @@ use GianTiaga\CodeGenerator\Plugins\MigrationPlugin\Builders\MigrationColumnBuil
 use GianTiaga\CodeGenerator\Plugins\MigrationPlugin\Dto\MigrationColumnDto;
 use GianTiaga\CodeGenerator\Plugins\MigrationPlugin\Helpers\MigrationCounter;
 use GianTiaga\CodeGenerator\Plugins\MigrationPlugin\Views\MigrationsView;
-use GianTiaga\CodeGenerator\Plugins\ModelPlugin\Builders\ModelBuilder;
 use GianTiaga\CodeGenerator\Renderers\Renderer;
 use Illuminate\Support\Str;
 
@@ -47,7 +46,7 @@ class MigrationPlugin extends AbstractPlugin
     {
         foreach ($this->codeGenerator->getTables() as $table) {
             $migrationBuilder = $table->getMigrationBuilder();
-            if (!$migrationBuilder) {
+            if (! $migrationBuilder) {
                 continue;
             }
 
@@ -71,9 +70,7 @@ class MigrationPlugin extends AbstractPlugin
     }
 
     /**
-     * @param MigrationColumnDto[] $columns
-     * @param TableBuilder $tableBuilder
-     * @return void
+     * @param  MigrationColumnDto[]  $columns
      */
     public function before(array $columns, TableBuilder $tableBuilder): void
     {
@@ -83,9 +80,7 @@ class MigrationPlugin extends AbstractPlugin
     }
 
     /**
-     * @param MigrationColumnDto[] $columns
-     * @param TableBuilder $tableBuilder
-     * @return void
+     * @param  MigrationColumnDto[]  $columns
      */
     public function after(array $columns, TableBuilder $tableBuilder): void
     {
@@ -94,18 +89,14 @@ class MigrationPlugin extends AbstractPlugin
         }
     }
 
-    /**
-     * @param TableBuilder $tableBuilder
-     * @return string
-     */
     public function getMigrationFileName(TableBuilder $tableBuilder): string
     {
-        $num = vsprintf("0000_00_00_00_%04d", [MigrationCounter::next()]);
+        $num = vsprintf('0000_00_00_00_%04d', [MigrationCounter::next()]);
+
         return "{$num}_create_{$tableBuilder->getName()}_table.php";
     }
 
     /**
-     * @param TableBuilder $tableBuilder
      * @return MigrationColumnDto[]
      */
     protected function makeColumnsFromTable(TableBuilder $tableBuilder): array
@@ -114,7 +105,7 @@ class MigrationPlugin extends AbstractPlugin
 
         foreach ($tableBuilder->getColumns() as $column) {
             $columnBuilder = $this->getColumnBuilderByColumn($column);
-            if (!$column->isInMigration() || !$columnBuilder) {
+            if (! $column->isInMigration() || ! $columnBuilder) {
                 continue;
             }
 
@@ -124,10 +115,6 @@ class MigrationPlugin extends AbstractPlugin
         return $columns;
     }
 
-    /**
-     * @param AbstractColumn $column
-     * @return MigrationColumnBuilder|null
-     */
     protected function getColumnBuilderByColumn(AbstractColumn $column): ?MigrationColumnBuilder
     {
         return match ($column::class) {
@@ -146,10 +133,9 @@ class MigrationPlugin extends AbstractPlugin
             Email::class,
             Password::class,
             Phone::class,
-            Slug::class
-                => MigrationColumnBuilder::makeFromColumn(
-                    'string',
-                    $column,
+            Slug::class => MigrationColumnBuilder::makeFromColumn(
+                'string',
+                $column,
             ),
 
             Number::class => MigrationColumnBuilder::makeFromColumn(
@@ -158,16 +144,14 @@ class MigrationPlugin extends AbstractPlugin
             ),
 
             TextArea::class,
-            WYSIWYG::class
-                => MigrationColumnBuilder::makeFromColumn(
-                    'text',
-                    $column,
+            WYSIWYG::class => MigrationColumnBuilder::makeFromColumn(
+                'text',
+                $column,
             ),
 
-            DateTime::class
-                => MigrationColumnBuilder::makeFromColumn(
-                    $column->getType()->name,
-                    $column,
+            DateTime::class => MigrationColumnBuilder::makeFromColumn(
+                $column->getType()->name,
+                $column,
             ),
 
             Json::class => MigrationColumnBuilder::makeFromColumn(
@@ -184,7 +168,7 @@ class MigrationPlugin extends AbstractPlugin
                     ),
                 ]),
             )
-                ->addFluentWhen(!$column->isRequired(), new MethodDto('nullable'))
+                ->addFluentWhen(! $column->isRequired(), new MethodDto('nullable'))
                 ->addFluent(new MethodDto('constrained'))
                 ->addFluent(new MethodDto('cascadeOnUpdate'))
                 ->addFluent(new MethodDto('cascadeOnDelete')),
@@ -202,7 +186,7 @@ class MigrationPlugin extends AbstractPlugin
 
                     CodeGenerator::make()
                         ->registerPlugins([
-                            new MigrationPlugin(),
+                            new MigrationPlugin,
                         ])
                         ->addTable(
                             TableBuilder::make($table)

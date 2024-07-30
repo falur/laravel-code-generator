@@ -21,20 +21,20 @@ use GianTiaga\CodeGenerator\Traits\Makeable;
 
 abstract class AbstractColumn
 {
-    use Makeable;
-    use HasName;
-    use HasLabel;
-    use HasRequired;
-    use HasUnique;
-    use HasDefaultValue;
     use HasComment;
+    use HasDefaultValue;
     use HasFillable;
-    use HasSortable;
-    use HasSearchable;
+    use HasFilterable;
     use HasInMigration;
     use HasInModel;
     use HasInMoonshineResource;
-    use HasFilterable;
+    use HasLabel;
+    use HasName;
+    use HasRequired;
+    use HasSearchable;
+    use HasSortable;
+    use HasUnique;
+    use Makeable;
 
     protected function __construct(
         ?string $name = null,
