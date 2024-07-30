@@ -44,7 +44,7 @@ class CodeGenerator
                 }
 
                 $this->tables[$file->getFilename()] = include $file->getPathname();
-                ksort($this->tables);
+                ksort($this->tables, SORT_NUMERIC);
             }
         }
 

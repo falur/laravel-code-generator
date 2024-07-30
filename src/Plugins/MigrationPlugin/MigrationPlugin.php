@@ -162,9 +162,10 @@ class MigrationPlugin extends AbstractPlugin
             BelongsTo::class => MigrationColumnBuilder::make(
                 new MethodDto('foreignIdFor', [
                     ArgumentDto::any(
-                        ClassFormatter::getFullRelationNameFromFieldName(
-                            $column->getName(),
-                        ),
+                        \str($column->getRelatedModel())
+                            ->prepend('App\\Models\\')
+                            ->append('::class')
+                            ->toString(),
                     ),
                 ]),
             )
