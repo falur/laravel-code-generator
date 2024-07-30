@@ -160,14 +160,17 @@ class MigrationPlugin extends AbstractPlugin
             ),
 
             BelongsTo::class => MigrationColumnBuilder::make(
-                new MethodDto('foreignIdFor', [
+                new MethodDto('foreignIdFor', array_filter([
                     ArgumentDto::any(
                         \str($column->getRelatedModel())
                             ->prepend('App\\Models\\')
                             ->append('::class')
                             ->toString(),
                     ),
-                ]),
+                    $column->getColumn()
+                        ? ArgumentDto::string($column->getColumn())
+                        : null,
+                ])),
             )
                 ->addFluentWhen(! $column->isRequired(), new MethodDto('nullable'))
                 ->addFluent(new MethodDto('constrained'))
