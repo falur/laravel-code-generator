@@ -19,21 +19,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-/**
-* Run the migrations.
-*/
-public function up(): void
-{
-Schema::create('{{ $view->tableName() }}', function (Blueprint $table) {
-{!! $view->columns() !!} {!! $indexes !!} {!! $uniques !!}
-});
-}
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('{{ $view->tableName() }}', function (Blueprint $table) {
+            {!! $view->columns() !!} {!! $indexes !!} {!! $uniques !!}
+        });
+    }
 
-/**
-* Reverse the migrations.
-*/
-public function down(): void
-{
-Schema::dropIfExists('{{ $view->tableName() }}');
-}
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('{{ $view->tableName() }}');
+    }
 };

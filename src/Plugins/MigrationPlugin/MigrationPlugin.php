@@ -176,14 +176,16 @@ class MigrationPlugin extends AbstractPlugin
 
             BelongsToMany::class => MigrationColumnBuilder::make()
                 ->addEventAfter(function (TableBuilder $tableBuilder) use ($column) {
-                    $field1 = Str::singular($tableBuilder->getName());
-                    $field2 = Str::singular($column->getName());
+                    $prepareForeignColumn = fn (string $col) => \str($col)
+                        ->singular()
+                        ->snake()
+                        ->toString();
+
+                    $field1 = $prepareForeignColumn($tableBuilder->getName());
+                    $field2 = $prepareForeignColumn($column->getName());
                     $table = collect([$field1, $field2])
                         ->sort()
                         ->implode('_');
-                    $table = \str($table)
-                        ->snake('_')
-                        ->toString();
 
                     CodeGenerator::make()
                         ->registerPlugins([
