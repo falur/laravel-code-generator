@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GianTiaga\CodeGenerator\Plugins\MoonshinePlugin\Views;
 
 use GianTiaga\CodeGenerator\Builders\TableBuilder;
+use GianTiaga\CodeGenerator\Columns\Relations\AbstractRelation;
 use GianTiaga\CodeGenerator\Columns\Relations\BelongsToMany;
 use GianTiaga\CodeGenerator\Columns\Relations\HasMany;
 use GianTiaga\CodeGenerator\Dto\ArgumentDto;
@@ -157,13 +158,14 @@ class MoonshineView implements ViewInterface
 
     private function getRelatedResource(MoonshineColumnDto $column): ?ArgumentDto
     {
-        if ($column->column instanceof HasMany || $column->column instanceof BelongsToMany) {
+        if ($column->column instanceof AbstractRelation) {
             /** @var string $name */
             $name = $column->column->getName();
 
             return ArgumentDto::any(
                 \str(ClassFormatter::getClassNameFromTableName($name))
-                    ->append('Resource::class')
+                    ->prepend('resource: new ')
+                    ->append('Resource()')
                     ->toString(),
             );
         }
