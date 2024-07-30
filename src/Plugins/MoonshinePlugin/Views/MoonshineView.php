@@ -81,56 +81,33 @@ class MoonshineView implements ViewInterface
         return implode(",\n", $result);
     }
 
-    public function fields(): string
+    public function fields(?\Closure $filter = null, bool $withFluent = true): string
     {
         $result = [];
 
+        if (!$filter) {
+            $filter = function (MoonshineColumnDto $column): bool {
+                if (! $column->column->isInMoonshineResource()
+                    || ! $column->moonshineColumnBuilder->getMoonshineField()
+                ) {
+                    return false;
+                }
+
+                return true;
+            };
+        }
+
         foreach ($this->columns as $column) {
-            if (! $column->column->isInMoonshineResource()
-                || ! $column->moonshineColumnBuilder->getMoonshineField()
-            ) {
+            if (!$filter($column)) {
                 continue;
             }
 
             $result[] = RendererHelper::renderCallMethod(
-                class_basename($column->moonshineColumnBuilder->getMoonshineField()),
-                new MethodDto('make', $column->column->getName() ? array_filter([
-                    ArgumentDto::string($column->column->getLabel()),
-                    ArgumentDto::string($column->column->getName()),
-                    $this->getRelatedResource($column),
-                ]) : null),
-                $column->moonshineColumnBuilder->getFluent(),
-                '::',
-                ',',
-            );
-        }
-
-        if (! $result) {
-            return '';
-        }
-
-        return implode("\n", $result);
-    }
-
-    public function filters(): string
-    {
-        $result = [];
-
-        foreach ($this->columns as $column) {
-            if (! $column->column->isInMoonshineResource()
-                || ! $column->column->isFilterable()
-                || ! $column->moonshineColumnBuilder->getMoonshineField()
-            ) {
-                continue;
-            }
-
-            $result[] = RendererHelper::renderCallMethod(
-                object: class_basename($column->moonshineColumnBuilder->getMoonshineField()),
-                method: new MethodDto('make', $column->column->getName() ? array_filter([
-                    ArgumentDto::string($column->column->getLabel()),
-                    ArgumentDto::string($column->column->getName()),
-                    $this->getRelatedResource($column),
-                ]) : null),
+                object: class_basename(
+                    $column->moonshineColumnBuilder->getMoonshineField()
+                ),
+                method: $this->getMethod($column),
+                fluent: $withFluent ? $column->moonshineColumnBuilder->getFluent() : [],
                 callKind: '::',
                 finishSymbol: ',',
             );
@@ -141,6 +118,40 @@ class MoonshineView implements ViewInterface
         }
 
         return implode("\n", $result);
+    }
+
+    private function getMethod(MoonshineColumnDto $column): MethodDto
+    {
+        if (!$column->column->getName()) {
+            $args = null;
+        } else if ($column->column instanceof AbstractRelation) {
+            $args = [
+                ArgumentDto::string($column->column->getLabel()),
+                ArgumentDto::string($column->column->getName()),
+                $this->getRelatedResource($column),
+            ];
+        } else {
+            $args = [
+                ArgumentDto::string($column->column->getLabel()),
+                ArgumentDto::string($column->column->getName()),
+            ];
+        }
+
+        return new MethodDto('make',  $args);
+    }
+
+    public function filters(): string
+    {
+        return $this->fields(filter: function (MoonshineColumnDto $column): bool {
+            if (! $column->column->isInMoonshineResource()
+                || ! $column->column->isFilterable()
+                || ! $column->moonshineColumnBuilder->getMoonshineField()
+            ) {
+                return false;
+            }
+
+            return true;
+        }, withFluent: false);
     }
 
     public function model(): string
@@ -160,7 +171,7 @@ class MoonshineView implements ViewInterface
     {
         if ($column->column instanceof AbstractRelation) {
             /** @var string $name */
-            $name = $column->column->getName();
+            $name = $column->column->getRelatedModel();
 
             return ArgumentDto::any(
                 \str(ClassFormatter::getClassNameFromTableName($name))

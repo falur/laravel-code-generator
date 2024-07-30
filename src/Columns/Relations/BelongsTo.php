@@ -20,7 +20,7 @@ class BelongsTo extends AbstractRelation
         return $this;
     }
 
-    public function getName(): ?string
+    public function getDatabaseColumn(): ?string
     {
         if ($this->name) {
             return \str($this->name)

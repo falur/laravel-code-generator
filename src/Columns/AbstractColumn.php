@@ -48,4 +48,9 @@ abstract class AbstractColumn
             $this->setLabel($label);
         }
     }
+
+    public function getDatabaseColumn(): ?string
+    {
+        return $this->getName();
+    }
 }

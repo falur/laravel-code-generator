@@ -42,7 +42,7 @@ class MigrationColumnBuilder
     ): MigrationColumnBuilder {
         return static::make(
             new MethodDto($mainMethod, [
-                ArgumentDto::string($column->getName()),
+                ArgumentDto::string($column->getDatabaseColumn()),
             ]),
         )
             ->addFluentWhen(
