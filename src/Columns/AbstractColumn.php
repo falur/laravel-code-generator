@@ -36,6 +36,8 @@ abstract class AbstractColumn
     use HasUnique;
     use Makeable;
 
+    protected ?string $databaseColumn = null;
+
     protected function __construct(
         ?string $name = null,
         ?string $label = null,
@@ -49,8 +51,24 @@ abstract class AbstractColumn
         }
     }
 
+    public function setDatabaseColumn(?string $databaseColumn): static
+    {
+        $this->databaseColumn = $databaseColumn;
+
+        return $this;
+    }
+
+    public function hasDatabaseColumn(): bool
+    {
+        return $this->databaseColumn !== null;
+    }
+
     public function getDatabaseColumn(): ?string
     {
+        if ($this->databaseColumn) {
+            return $this->databaseColumn;
+        }
+
         return $this->getName();
     }
 }

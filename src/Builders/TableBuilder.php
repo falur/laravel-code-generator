@@ -38,7 +38,7 @@ class TableBuilder
         }
 
         if ($this->getName()) {
-            return ClassFormatter::getClassNameFromTableName($this->getName());
+            return ClassFormatter::getModelNameFromTableName($this->getName());
         }
 
         return '';

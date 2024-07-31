@@ -6,7 +6,7 @@ namespace GianTiaga\CodeGenerator\Helpers;
 
 final readonly class ClassFormatter
 {
-    public static function getClassNameFromTableName(string $tableName): string
+    public static function getModelNameFromTableName(string $tableName): string
     {
         return \str($tableName)
             ->singular()
@@ -30,27 +30,6 @@ final readonly class ClassFormatter
         return \str($field)
             ->replace('_id', '')
             ->camel()
-            ->toString();
-    }
-
-    public static function getShortRelationNameFromFieldName(string $field): string
-    {
-        return \str($field)
-            ->replace('_id', '')
-            ->camel()
-            ->ucfirst()
-            ->append('::class')
-            ->toString();
-    }
-
-    public static function getFullRelationNameFromFieldName(string $field): string
-    {
-        return \str($field)
-            ->replace('_id', '')
-            ->camel()
-            ->ucfirst()
-            ->prepend('App\\Models\\')
-            ->append('::class')
             ->toString();
     }
 }

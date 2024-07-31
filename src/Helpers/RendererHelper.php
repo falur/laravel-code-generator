@@ -90,7 +90,7 @@ final readonly class RendererHelper
 
     public static function renderRulesForColumn(AbstractColumn $column): string
     {
-        if (! $column->getName()) {
+        if (! $column->getDatabaseColumn()) {
             return '';
         }
 
@@ -102,7 +102,7 @@ final readonly class RendererHelper
             return '';
         }
 
-        $result = "'{$column->getName()}' => [";
+        $result = "'{$column->getDatabaseColumn()}' => [";
         if ($column->isRequired() && ! ($column instanceof File || $column instanceof BelongsToMany || $column instanceof HasMany)) {
             $result .= "'required', ";
         }

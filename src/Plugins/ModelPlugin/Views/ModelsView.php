@@ -37,7 +37,7 @@ class ModelsView implements ViewInterface
 
     public function className(): string
     {
-        return ClassFormatter::getClassNameFromTableName(
+        return ClassFormatter::getModelNameFromTableName(
             $this->tableBuilder->getName(),
         );
     }
@@ -98,8 +98,12 @@ class ModelsView implements ViewInterface
         $result = [];
         foreach ($this->columns as $column) {
             if ($column->modelColumnBuilder->isFillable()) {
-                $result[] = $column->modelColumnBuilder->getFillableColumn();
+                $result[] = new Str($column->modelColumnBuilder->getFillableColumn());
             }
+        }
+
+        if (!$result) {
+            return '';
         }
 
         return implode(",\n", $result).',';

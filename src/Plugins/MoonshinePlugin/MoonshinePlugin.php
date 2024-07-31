@@ -63,7 +63,7 @@ class MoonshinePlugin extends AbstractPlugin
 
     public function getMoonshineFilename(TableBuilder $table): string
     {
-        return str(ClassFormatter::getClassNameFromTableName($table->getName()))
+        return str(ClassFormatter::getModelNameFromTableName($table->getName()))
             ->append('Resource.php')
             ->toString();
     }

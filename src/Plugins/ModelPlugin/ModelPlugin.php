@@ -86,7 +86,7 @@ class ModelPlugin extends AbstractPlugin
 
     public function getModelFileName(TableBuilder $tableBuilder): string
     {
-        return ClassFormatter::getClassNameFromTableName($tableBuilder->getName()).'.php';
+        return ClassFormatter::getModelNameFromTableName($tableBuilder->getName()).'.php';
     }
 
     /**

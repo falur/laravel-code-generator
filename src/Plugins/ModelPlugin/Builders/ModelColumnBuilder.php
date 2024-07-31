@@ -24,10 +24,6 @@ class ModelColumnBuilder
     {
         return static::make()
             ->setFillable($column->isFillable())
-            ->setFillableColumn(
-                $column->getName()
-                    ? (string) new Str($column->getName())
-                    : null
-            );
+            ->setFillableColumn($column->getDatabaseColumn());
     }
 }

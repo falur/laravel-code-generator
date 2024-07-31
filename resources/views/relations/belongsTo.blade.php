@@ -8,9 +8,9 @@
     $methodName = ClassFormatter::getBelongsToMethodNameFromFieldName($column->column->getName());
 @endphp
 /**
-* @return BelongsTo<{!! $className !!}, self>
-*/
+ * @return BelongsTo<{!! $className !!}, self>
+ */
 public function {!! $methodName !!}(): BelongsTo
 {
-return $this->belongsTo({!! $className !!}::class @if($relationColumn->getColumn()), '{{ $relationColumn->getColumn() }}' @endif);
+    return $this->belongsTo({!! $className !!}::class @if($relationColumn->getColumn()), '{{ $relationColumn->getColumn() }}' @endif);
 }

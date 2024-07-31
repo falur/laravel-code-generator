@@ -167,8 +167,8 @@ class MigrationPlugin extends AbstractPlugin
                             ->append('::class')
                             ->toString(),
                     ),
-                    $column->getColumn()
-                        ? ArgumentDto::string($column->getColumn())
+                    $column->hasDatabaseColumn()
+                        ? ArgumentDto::string($column->getDatabaseColumn())
                         : null,
                 ])),
             )

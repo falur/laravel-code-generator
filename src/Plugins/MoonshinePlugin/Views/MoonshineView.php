@@ -159,7 +159,7 @@ class MoonshineView implements ViewInterface
         /** @var string $name */
         $name = $this->tableBuilder->getName();
 
-        return ClassFormatter::getClassNameFromTableName($name);
+        return ClassFormatter::getModelNameFromTableName($name);
     }
 
     public function label(): string
@@ -174,7 +174,7 @@ class MoonshineView implements ViewInterface
             $name = $column->column->getRelatedModel();
 
             return ArgumentDto::any(
-                \str(ClassFormatter::getClassNameFromTableName($name))
+                \str(ClassFormatter::getModelNameFromTableName($name))
                     ->prepend('resource: new ')
                     ->append('Resource()')
                     ->toString(),
