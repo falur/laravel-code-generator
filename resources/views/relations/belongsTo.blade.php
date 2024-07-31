@@ -12,5 +12,5 @@
  */
 public function {!! $methodName !!}(): BelongsTo
 {
-    return $this->belongsTo({!! $className !!}::class @if($relationColumn->getColumn()), '{{ $relationColumn->getColumn() }}' @endif);
+    return $this->belongsTo({!! $className !!}::class @if($relationColumn->hasDatabaseColumn()), '{{ $relationColumn->getDatabaseColumn() }}' @endif);
 }

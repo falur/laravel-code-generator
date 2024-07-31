@@ -49,7 +49,7 @@ class MoonshineView implements ViewInterface
             }
 
             if ($column->moonshineColumnBuilder->isSearchable()) {
-                $result[] = new Str($column->column->getName());
+                $result[] = new Str($column->column->getDatabaseColumn());
             }
         }
 
