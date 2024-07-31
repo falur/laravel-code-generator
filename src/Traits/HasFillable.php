@@ -8,14 +8,24 @@ trait HasFillable
 {
     protected bool $fillable = true;
 
-    protected ?string $fillableColumn = null;
+    /**
+     * @var string|string[]|null
+     */
+    protected string|array|null $fillableColumn = null;
 
-    public function getFillableColumn(): ?string
+    /**
+     * @return string|string[]|null
+     */
+    public function getFillableColumn(): string|array|null
     {
         return $this->fillableColumn;
     }
 
-    public function setFillableColumn(?string $fillableColumn): static
+    /**
+     * @param string|string[]|null $fillableColumn
+     * @return $this
+     */
+    public function setFillableColumn(string|array|null $fillableColumn): static
     {
         $this->fillableColumn = $fillableColumn;
 

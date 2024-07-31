@@ -97,8 +97,14 @@ class ModelsView implements ViewInterface
     {
         $result = [];
         foreach ($this->columns as $column) {
-            if ($column->modelColumnBuilder->isFillable()) {
-                $result[] = new Str($column->modelColumnBuilder->getFillableColumn());
+            $fillableColumn = $column->modelColumnBuilder->getFillableColumn();
+            if ($column->modelColumnBuilder->isFillable() && $fillableColumn) {
+                $result[] = is_string($fillableColumn)
+                    ? new Str($fillableColumn)
+                    : implode(
+                        ",\n",
+                        array_map(fn (string $v) => new Str($v), $fillableColumn)
+                    );
             }
         }
 

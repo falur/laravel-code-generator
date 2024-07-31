@@ -142,12 +142,7 @@ class ModelPlugin extends AbstractPlugin
                 ->setFillable(false),
 
             Timestamps::class => ModelColumnBuilder::makeFromColumn($column)
-                ->setFillableColumn(
-                    implode(",\n", [
-                        new Str('updated_at'),
-                        new Str('created_at'),
-                    ]),
-                ),
+                ->setFillableColumn(['updated_at', 'created_at']),
 
             default => null,
         };
