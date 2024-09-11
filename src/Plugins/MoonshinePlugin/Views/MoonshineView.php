@@ -68,7 +68,7 @@ class MoonshineView implements ViewInterface
                 continue;
             }
 
-            $val = RendererHelper::renderRulesForColumn($column->column);
+            $val = RendererHelper::renderRulesForColumn($column->column, $this->tableBuilder);
             if ($val) {
                 $result[] = $val;
             }
@@ -81,7 +81,12 @@ class MoonshineView implements ViewInterface
         return implode(",\n", $result);
     }
 
-    public function fields(?\Closure $filter = null, bool $withFluent = true): string
+    /**
+     * @param \Closure|null $filter
+     * @param MethodDto[] $fluent
+     * @return string
+     */
+    public function fields(?\Closure $filter = null, array $fluent = []): string
     {
         $result = [];
 
@@ -107,7 +112,7 @@ class MoonshineView implements ViewInterface
                     $column->moonshineColumnBuilder->getMoonshineField()
                 ),
                 method: $this->getMethod($column),
-                fluent: $withFluent ? $column->moonshineColumnBuilder->getFluent() : [],
+                fluent: $fluent ?: $column->moonshineColumnBuilder->getFluent(),
                 callKind: '::',
                 finishSymbol: ',',
             );
@@ -151,7 +156,9 @@ class MoonshineView implements ViewInterface
             }
 
             return true;
-        }, withFluent: false);
+        }, fluent: [
+            new MethodDto('nullable')
+        ]);
     }
 
     public function model(): string

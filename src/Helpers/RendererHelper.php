@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GianTiaga\CodeGenerator\Helpers;
 
+use GianTiaga\CodeGenerator\Builders\TableBuilder;
 use GianTiaga\CodeGenerator\Columns\AbstractColumn;
 use GianTiaga\CodeGenerator\Columns\Fields\Boolean;
 use GianTiaga\CodeGenerator\Columns\Fields\Color;
@@ -88,8 +89,10 @@ final readonly class RendererHelper
         return implode(",\n", $result).',';
     }
 
-    public static function renderRulesForColumn(AbstractColumn $column): string
-    {
+    public static function renderRulesForColumn(
+        AbstractColumn $column,
+        TableBuilder $table,
+    ): string {
         if (! $column->getDatabaseColumn()) {
             return '';
         }
@@ -107,7 +110,7 @@ final readonly class RendererHelper
             $result .= "'required', ";
         }
         if ($column->isUnique()) {
-            $result .= "'unique', ";
+            $result .= "'unique:".$table->getName()."', ";
         }
         if ($column instanceof Boolean) {
             $result .= "'boolean', ";

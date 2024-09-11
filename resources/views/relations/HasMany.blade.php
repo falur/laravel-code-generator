@@ -12,5 +12,5 @@
  */
 public function {{ $methodName }}(): HasMany
 {
-    return $this->hasMay({{ $className }}::class);
+    return $this->hasMany({{ $className }}::class);
 }

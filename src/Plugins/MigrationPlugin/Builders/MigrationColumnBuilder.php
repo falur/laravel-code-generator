@@ -54,7 +54,7 @@ class MigrationColumnBuilder
                 new MethodDto('unique')
             )
             ->addFluentWhen(
-                (bool) $column->getDefaultValue(),
+                $column->getDefaultValue() !== null,
                 new MethodDto('default', [
                     ArgumentDto::any($column->getDefaultValue()),
                 ]),
