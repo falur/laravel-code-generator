@@ -8,6 +8,7 @@ use GianTiaga\CodeGenerator\Helpers\ClassFormatter;
 use GianTiaga\CodeGenerator\Plugins\MigrationPlugin\Traits\HasMigrationBuilder;
 use GianTiaga\CodeGenerator\Plugins\ModelPlugin\Traits\HasModelBuilder;
 use GianTiaga\CodeGenerator\Plugins\MoonshinePlugin\Traits\HasMoonshineBuilder;
+use GianTiaga\CodeGenerator\Plugins\PolicyPlugin\Traits\HasPolicyBuilder;
 use GianTiaga\CodeGenerator\Traits\HasColumns;
 use GianTiaga\CodeGenerator\Traits\HasLabel;
 use GianTiaga\CodeGenerator\Traits\HasName;
@@ -20,6 +21,7 @@ class TableBuilder
     use HasMigrationBuilder;
     use HasModelBuilder;
     use HasMoonshineBuilder;
+    use HasPolicyBuilder;
     use HasName;
     use Makeable;
 

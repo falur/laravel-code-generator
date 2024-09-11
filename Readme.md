@@ -180,7 +180,7 @@ class GenerateCode extends Command
 
 ## TODO Plugins
 
-- [ ] Policies
+- [x] Policies
 - [ ] Factories
 - [ ] Api Resources
 - [ ] Request

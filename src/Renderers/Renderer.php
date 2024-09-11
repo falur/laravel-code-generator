@@ -41,7 +41,12 @@ class Renderer
             return;
         }
 
-        $filename = rtrim($this->builder->getDestination(), '/').'/'.ltrim($filename, '/');
+        $folder = rtrim($this->builder->getDestination(), '/').'/';
+        if (!file_exists($folder)) {
+            mkdir($folder, 0755, true);
+        }
+
+        $filename = $folder.ltrim($filename, '/');
 
         if (! file_exists($filename) || $force) {
             file_put_contents($filename, $rendered);
