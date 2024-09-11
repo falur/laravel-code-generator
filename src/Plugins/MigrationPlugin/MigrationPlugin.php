@@ -174,6 +174,17 @@ class MigrationPlugin extends AbstractPlugin
             )
                 ->addFluentWhen(! $column->isRequired(), new MethodDto('nullable'))
                 ->addFluent(new MethodDto('constrained'))
+                ->addFluentWhen(
+                    $column->hasDatabaseColumn(),
+                    new MethodDto('on', [
+                        ArgumentDto::string(
+                            \str($column->getRelatedModel())
+                                ->lower()
+                                ->plural()
+                                ->toString(),
+                        ),
+                    ])
+                )
                 ->addFluent(new MethodDto('cascadeOnUpdate'))
                 ->addFluent(new MethodDto('cascadeOnDelete')),
 
