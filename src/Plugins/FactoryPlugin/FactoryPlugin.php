@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GianTiaga\CodeGenerator\Plugins\PolicyPlugin;
+namespace GianTiaga\CodeGenerator\Plugins\FactoryPlugin;
 
 use GianTiaga\CodeGenerator\Builders\TableBuilder;
 use GianTiaga\CodeGenerator\Helpers\ClassFormatter;
@@ -11,7 +11,7 @@ use GianTiaga\CodeGenerator\Plugins\MoonshinePlugin\Views\MoonshineView;
 use GianTiaga\CodeGenerator\Plugins\PolicyPlugin\Views\PolicyView;
 use GianTiaga\CodeGenerator\Renderers\Renderer;
 
-class PolicyPlugin extends AbstractPlugin
+class FactoryPlugin extends AbstractPlugin
 {
     /**
      * @throws \Throwable
@@ -21,21 +21,21 @@ class PolicyPlugin extends AbstractPlugin
         foreach ($this->codeGenerator->getTables() as $table) {
             $renderer = new Renderer(
                 new PolicyView($table),
-                $table->getPolicyBuilder(),
+                $table->getFactoryBuilder(),
             );
 
             $renderer->copyRendered(
-                $this->getPolicyFileName(
+                $this->getFactoryFileName(
                     $table,
                 ),
             );
         }
     }
 
-    protected function getPolicyFileName(TableBuilder $table): string
+    protected function getFactoryFileName(TableBuilder $table): string
     {
         return str(ClassFormatter::getModelNameFromTableName($table->getName()))
-            ->append('Policy.php')
+            ->append('Factory.php')
             ->toString();
     }
 }
