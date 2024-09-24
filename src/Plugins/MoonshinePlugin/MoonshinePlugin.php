@@ -27,11 +27,11 @@ use GianTiaga\CodeGenerator\Columns\Relations\BelongsToMany;
 use GianTiaga\CodeGenerator\Columns\Relations\HasMany;
 use GianTiaga\CodeGenerator\Helpers\ClassFormatter;
 use GianTiaga\CodeGenerator\Plugins\AbstractPlugin;
+use GianTiaga\CodeGenerator\Plugins\ModelPlugin\Builders\ModelColumnBuilder;
 use GianTiaga\CodeGenerator\Plugins\MoonshinePlugin\Builders\MoonshineColumnBuilder;
 use GianTiaga\CodeGenerator\Plugins\MoonshinePlugin\Dto\MoonshineColumnDto;
 use GianTiaga\CodeGenerator\Plugins\MoonshinePlugin\Views\MoonshineView;
 use GianTiaga\CodeGenerator\Renderers\Renderer;
-use GianTiaga\MoonshineFile\Fields\SpatieUppyFile;
 
 class MoonshinePlugin extends AbstractPlugin
 {
@@ -95,89 +95,89 @@ class MoonshinePlugin extends AbstractPlugin
         return match ($column::class) {
             ID::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\ID::class
+                \MoonShine\UI\Fields\ID::class
             ),
 
             Boolean::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Switcher::class
+                \MoonShine\UI\Fields\Switcher::class
             ),
 
             Text::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Text::class
+                \MoonShine\UI\Fields\Text::class
             ),
 
             Color::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Color::class
+                \MoonShine\UI\Fields\Color::class
             ),
 
             Hidden::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Hidden::class
+                \MoonShine\UI\Fields\Hidden::class
             ),
 
             Email::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Email::class
+                \MoonShine\UI\Fields\Email::class
             ),
 
             Password::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Password::class
+                \MoonShine\UI\Fields\Password::class
             ),
 
             Phone::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Phone::class
+                \MoonShine\UI\Fields\Phone::class
             ),
 
             Slug::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Slug::class
+                \MoonShine\UI\Fields\Slug::class
             ),
 
             TextArea::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Textarea::class
+                \MoonShine\UI\Fields\Textarea::class
             ),
 
             WYSIWYG::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\TinyMce::class
+                \MoonShine\UI\Fields\Markdown::class
             ),
 
             Number::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Number::class
+                \MoonShine\UI\Fields\Number::class
             ),
 
             DateTime::class => MoonshineColumnBuilder::makeFromColumn(
-                $column, \MoonShine\Fields\Date::class
+                $column, \MoonShine\UI\Fields\Date::class
             ),
 
             Json::class => MoonshineColumnBuilder::makeFromColumn(
-                $column, \MoonShine\Fields\Json::class),
+                $column, \MoonShine\UI\Fields\Json::class),
 
             BelongsToMany::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Relationships\BelongsToMany::class
+                \MoonShine\Laravel\Fields\Relationships\BelongsToMany::class
             ),
 
             HasMany::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Relationships\HasMany::class
+                \MoonShine\Laravel\Fields\Relationships\HasMany::class
             ),
 
             BelongsTo::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                \MoonShine\Fields\Relationships\BelongsTo::class
+                \MoonShine\Laravel\Fields\Relationships\BelongsTo::class
             ),
 
             File::class => MoonshineColumnBuilder::makeFromColumn(
                 $column,
-                SpatieUppyFile::class,
+                \MoonShine\UI\Fields\File::class,
             ),
 
             Timestamps::class => null,

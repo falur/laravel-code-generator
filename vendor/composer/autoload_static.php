@@ -15,7 +15,6 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -34,6 +33,7 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f57d353b41eb2e234b26064d63d8c5dd' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Filesystem/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
+        '7f7ac2ddea9cc3fb4b2cc201d63dbc10' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Log/functions.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '38143a9afc50997d55e4815db8489d1c' => __DIR__ . '/..' . '/rector/rector/bootstrap.php',
@@ -43,8 +43,8 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
-        'c379e2a4ec3735f6c4915556c8c81813' => __DIR__ . '/..' . '/rap2hpoutre/fast-excel/src/functions/fastexcel.php',
-        'b1b880ae2c4f1abcc7b066782da58c94' => __DIR__ . '/..' . '/moonshine/moonshine/src/helpers.php',
+        'c89f87fd3f4c9ac42d00f5951955633c' => __DIR__ . '/..' . '/moonshine/moonshine/src/Laravel/src/helpers.php',
+        'ef789b17d8cf53ea7bba1a3992024ba3' => __DIR__ . '/..' . '/moonshine/moonshine/src/Support/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -73,7 +73,6 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
             'Symfony\\Polyfill\\Uuid\\' => 22,
             'Symfony\\Polyfill\\Php83\\' => 23,
             'Symfony\\Polyfill\\Php80\\' => 23,
-            'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
             'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
@@ -101,6 +100,7 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Clock\\' => 24,
+            'Symfony\\Bridge\\PsrHttpMessage\\' => 30,
             'Spatie\\Ray\\' => 11,
             'Spatie\\Macroable\\' => 17,
             'Spatie\\LaravelRay\\' => 18,
@@ -108,7 +108,6 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         ),
         'R' => 
         array (
-            'Rap2hpoutre\\FastExcel\\' => 22,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -132,15 +131,23 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
             'Orchestra\\Testbench\\' => 20,
             'Orchestra\\Canvas\\Core\\' => 22,
             'Orchestra\\Canvas\\' => 17,
-            'OpenSpout\\' => 10,
         ),
         'N' => 
         array (
+            'Nyholm\\Psr7\\' => 12,
             'NunoMaduro\\Collision\\' => 21,
         ),
         'M' => 
         array (
-            'MoonShine\\Database\\Factories\\' => 29,
+            'MoonShine\\UI\\' => 13,
+            'MoonShine\\Support\\' => 18,
+            'MoonShine\\MenuManager\\' => 22,
+            'MoonShine\\Laravel\\Database\\Factories\\' => 37,
+            'MoonShine\\Laravel\\' => 18,
+            'MoonShine\\Core\\' => 15,
+            'MoonShine\\Contracts\\' => 20,
+            'MoonShine\\ColorManager\\' => 23,
+            'MoonShine\\AssetManager\\' => 23,
             'MoonShine\\' => 10,
             'Monolog\\' => 8,
             'Mockery\\' => 8,
@@ -148,6 +155,7 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         'L' => 
         array (
             'Leeto\\PackageCommand\\' => 21,
+            'Leeto\\FastAttributes\\' => 21,
             'League\\MimeTypeDetection\\' => 25,
             'League\\Flysystem\\Local\\' => 23,
             'League\\Flysystem\\' => 17,
@@ -254,10 +262,6 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
-        ),
-        'Symfony\\Polyfill\\Php72\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -367,6 +371,10 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         array (
             0 => __DIR__ . '/..' . '/symfony/clock',
         ),
+        'Symfony\\Bridge\\PsrHttpMessage\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/psr-http-message-bridge',
+        ),
         'Spatie\\Ray\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/ray/src',
@@ -382,10 +390,6 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         'Spatie\\Backtrace\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/backtrace/src',
-        ),
-        'Rap2hpoutre\\FastExcel\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/rap2hpoutre/fast-excel/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -456,17 +460,49 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         array (
             0 => __DIR__ . '/..' . '/orchestra/canvas/src',
         ),
-        'OpenSpout\\' => 
+        'Nyholm\\Psr7\\' => 
         array (
-            0 => __DIR__ . '/..' . '/openspout/openspout/src',
+            0 => __DIR__ . '/..' . '/nyholm/psr7/src',
         ),
         'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
         ),
-        'MoonShine\\Database\\Factories\\' => 
+        'MoonShine\\UI\\' => 
         array (
-            0 => __DIR__ . '/..' . '/moonshine/moonshine/database/factories',
+            0 => __DIR__ . '/..' . '/moonshine/moonshine/src/UI/src',
+        ),
+        'MoonShine\\Support\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/moonshine/moonshine/src/Support/src',
+        ),
+        'MoonShine\\MenuManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/moonshine/moonshine/src/MenuManager/src',
+        ),
+        'MoonShine\\Laravel\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/moonshine/moonshine/src/Laravel/database/factories',
+        ),
+        'MoonShine\\Laravel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/moonshine/moonshine/src/Laravel/src',
+        ),
+        'MoonShine\\Core\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/moonshine/moonshine/src/Core/src',
+        ),
+        'MoonShine\\Contracts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/moonshine/moonshine/src/Contracts/src',
+        ),
+        'MoonShine\\ColorManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/moonshine/moonshine/src/ColorManager/src',
+        ),
+        'MoonShine\\AssetManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/moonshine/moonshine/src/AssetManager/src',
         ),
         'MoonShine\\' => 
         array (
@@ -483,6 +519,10 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         'Leeto\\PackageCommand\\' => 
         array (
             0 => __DIR__ . '/..' . '/lee-to/laravel-package-command/src',
+        ),
+        'Leeto\\FastAttributes\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lee-to/fast-attributes/src',
         ),
         'League\\MimeTypeDetection\\' => 
         array (
@@ -1173,6 +1213,7 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         'PHPUnit\\Framework\\MockObject\\MockObjectInternal' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Interface/MockObjectInternal.php',
         'PHPUnit\\Framework\\MockObject\\MutableStubApi' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Api/MutableStubApi.php',
         'PHPUnit\\Framework\\MockObject\\NeverReturningMethodException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Exception/NeverReturningMethodException.php',
+        'PHPUnit\\Framework\\MockObject\\NoMoreReturnValuesConfiguredException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Exception/NoMoreReturnValuesConfiguredException.php',
         'PHPUnit\\Framework\\MockObject\\ProxiedCloneMethod' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Api/ProxiedCloneMethod.php',
         'PHPUnit\\Framework\\MockObject\\ReflectionException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Exception/ReflectionException.php',
         'PHPUnit\\Framework\\MockObject\\ReturnValueGenerator' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/ReturnValueGenerator.php',
@@ -1407,6 +1448,8 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         'PHPUnit\\Runner\\GarbageCollection\\GarbageCollectionHandler' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/GarbageCollection/GarbageCollectionHandler.php',
         'PHPUnit\\Runner\\GarbageCollection\\Subscriber' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/GarbageCollection/Subscriber/Subscriber.php',
         'PHPUnit\\Runner\\GarbageCollection\\TestFinishedSubscriber' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/GarbageCollection/Subscriber/TestFinishedSubscriber.php',
+        'PHPUnit\\Runner\\HookMethod' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/HookMethod/HookMethod.php',
+        'PHPUnit\\Runner\\HookMethodCollection' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/HookMethod/HookMethodCollection.php',
         'PHPUnit\\Runner\\InvalidOrderException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/Exception/InvalidOrderException.php',
         'PHPUnit\\Runner\\InvalidPhptFileException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/Exception/InvalidPhptFileException.php',
         'PHPUnit\\Runner\\NoIgnoredEventException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/Exception/NoIgnoredEventException.php',
@@ -1657,6 +1700,7 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         'PHPUnit\\Util\\Color' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Color.php',
         'PHPUnit\\Util\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Exception/Exception.php',
         'PHPUnit\\Util\\ExcludeList' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/ExcludeList.php',
+        'PHPUnit\\Util\\Exporter' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Exporter.php',
         'PHPUnit\\Util\\Filesystem' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Filesystem.php',
         'PHPUnit\\Util\\Filter' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Filter.php',
         'PHPUnit\\Util\\GlobalState' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/GlobalState.php',
@@ -1860,6 +1904,7 @@ class ComposerStaticInit18f7d95ed19227d7090951fc1b8ca231
         'SebastianBergmann\\Comparator\\ComparisonFailure' => __DIR__ . '/..' . '/sebastian/comparator/src/ComparisonFailure.php',
         'SebastianBergmann\\Comparator\\DOMNodeComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/DOMNodeComparator.php',
         'SebastianBergmann\\Comparator\\DateTimeComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/DateTimeComparator.php',
+        'SebastianBergmann\\Comparator\\EnumerationComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/EnumerationComparator.php',
         'SebastianBergmann\\Comparator\\Exception' => __DIR__ . '/..' . '/sebastian/comparator/src/exceptions/Exception.php',
         'SebastianBergmann\\Comparator\\ExceptionComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ExceptionComparator.php',
         'SebastianBergmann\\Comparator\\Factory' => __DIR__ . '/..' . '/sebastian/comparator/src/Factory.php',

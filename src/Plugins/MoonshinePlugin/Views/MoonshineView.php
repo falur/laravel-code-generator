@@ -83,10 +83,10 @@ class MoonshineView implements ViewInterface
 
     /**
      * @param \Closure|null $filter
-     * @param MethodDto[] $fluent
+     * @param MethodDto[]|\Closure $fluent
      * @return string
      */
-    public function fields(?\Closure $filter = null, array $fluent = []): string
+    public function fields(?\Closure $filter = null, array|\Closure|null $fluent = []): string
     {
         $result = [];
 
@@ -107,14 +107,26 @@ class MoonshineView implements ViewInterface
                 continue;
             }
 
+            if (is_null($fluent)) {
+                $newFluent = [];
+            } else if (is_callable($fluent)) {
+                $newFluent = collect($column->moonshineColumnBuilder->getFluent())
+                    ->filter($fluent)
+                    ->toArray();
+            } else if (is_array($fluent) && $fluent) {
+                $newFluent = $fluent;
+            } else {
+                $newFluent = $column->moonshineColumnBuilder->getFluent();
+            }
+
             $result[] = RendererHelper::renderCallMethod(
                 object: class_basename(
                     $column->moonshineColumnBuilder->getMoonshineField()
                 ),
                 method: $this->getMethod($column),
-                fluent: $fluent ?: $column->moonshineColumnBuilder->getFluent(),
+                fluent: $newFluent,
                 callKind: '::',
-                finishSymbol: ',',
+                finishSymbol: ", \n",
             );
         }
 
@@ -123,6 +135,16 @@ class MoonshineView implements ViewInterface
         }
 
         return implode("\n", $result);
+    }
+
+    public function indexFields(): string
+    {
+        return $this->fields(fluent: fn (MethodDto $dto) => $dto->name === 'sortable');
+    }
+
+    public function formFields(): string
+    {
+        return $this->fields(fluent: fn (MethodDto $dto) => $dto->name !== 'sortable');
     }
 
     private function getMethod(MoonshineColumnDto $column): MethodDto

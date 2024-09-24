@@ -6,11 +6,11 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
+use MoonShine\Decorations\Block;
+use MoonShine\Resources\ModelResource;
+use MoonShine\Fields\Field;
+use MoonShine\Components\MoonShineComponent;
 use App\Models\{!! $view->model() !!};
-use MoonShine\Laravel\Resources\ModelResource;
-use MoonShine\UI\Components\Layout\Box;
-use MoonShine\Contracts\UI\FieldContract;
-use MoonShine\Contracts\UI\ComponentContract;
 {!! $view->imports() !!}
 
 /**
@@ -24,34 +24,32 @@ class {!! $view->model() !!}Resource extends ModelResource
 
     protected string $column = 'id';
 
-    protected bool $withPolicy = true;
-
     /**
-     * @return list<FieldContract>
+     * @return list<Field>
      */
-    protected function indexFields(): iterable
+    public function indexFields(): array
     {
         return [
-            {!! $view->indexFields() !!}
+            {!! $view->fields() !!}
         ];
     }
 
     /**
-     * @return list<ComponentContract|FieldContract>
+     * @return list<MoonShineComponent|Field>
      */
-    protected function formFields(): iterable
+    public function formFields(): array
     {
         return [
-            Box::make([
-                {!! $view->formFields() !!},
-            ])
+            Block::make([
+                {!! $view->fields() !!}
+            ]),
         ];
     }
 
     /**
-     * @return list<ComponentContract|FieldContract>
+     * @return list<MoonShineComponent|Field>
      */
-    protected function detailFields(): iterable
+    public function detailFields(): array
     {
         return $this->formFields();
     }
@@ -62,7 +60,7 @@ class {!! $view->model() !!}Resource extends ModelResource
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules
      */
-    protected function rules(mixed $item): array
+    public function rules(Model $item): array
     {
         return [
             {!! $view->rules() !!}
@@ -80,7 +78,7 @@ class {!! $view->model() !!}Resource extends ModelResource
     }
 
     /**
-     * @return list<FieldContract>
+     * @return list<MoonShineComponent|Field>
      */
     public function filters(): array
     {

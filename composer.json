@@ -23,7 +23,7 @@
     },
     "require-dev": {
         "laravel/framework": "^11.18",
-        "moonshine/moonshine": "^2.19",
+        "moonshine/moonshine": "^3.0",
         "larastan/larastan": "^2.9",
         "laravel/pint": "^1.17",
         "orchestra/testbench": "^9.2"
@@ -38,5 +38,7 @@
                 "GianTiaga\\CodeGenerator\\Providers\\CodeGeneratorServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
