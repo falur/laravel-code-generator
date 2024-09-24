@@ -43,7 +43,7 @@ class {!! $view->model() !!}Resource extends ModelResource
     {
         return [
             Box::make([
-                {!! $view->formFields() !!},
+                {!! $view->formFields() !!}
             ])
         ];
     }

@@ -134,7 +134,7 @@ class MoonshineView implements ViewInterface
             return '';
         }
 
-        return implode("\n", $result);
+        return trim(implode("\n", array_filter($result)));
     }
 
     public function indexFields(): string
@@ -204,8 +204,8 @@ class MoonshineView implements ViewInterface
 
             return ArgumentDto::any(
                 \str(ClassFormatter::getModelNameFromTableName($name))
-                    ->prepend('resource: new ')
-                    ->append('Resource()')
+                    ->prepend('resource: ')
+                    ->append('Resource::class')
                     ->toString(),
             );
         }
