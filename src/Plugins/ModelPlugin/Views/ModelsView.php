@@ -50,6 +50,7 @@ class ModelsView implements ViewInterface
             [$modelBuilder->getExtends()],
             $modelBuilder->getImplements(),
             $modelBuilder->getUses(),
+            $modelBuilder->getImports(),
         );
         $classes = array_filter($classes);
 
@@ -66,6 +67,9 @@ class ModelsView implements ViewInterface
     {
         $result = [];
         foreach ($this->tableBuilder->getModelBuilder()->getUses() as $use) {
+            if ($use->comment) {
+                $result[] = $use->comment();
+            }
             $result[] = 'use '.class_basename($use->value()).';';
         }
 
@@ -122,7 +126,10 @@ class ModelsView implements ViewInterface
             $name = $column->column->getName();
             $cast = $column->modelColumnBuilder->getCast();
             if ($cast && $name) {
-                $result[] = new Str($column->column->getName()).'=> '.$cast;
+                $colName = $column->column->getDatabaseColumn()
+                    ?: $column->column->getName();
+
+                $result[] = new Str($colName).'=> '.$cast;
             }
         }
 

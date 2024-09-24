@@ -9,6 +9,7 @@ final readonly class ClassNameDto
     public function __construct(
         public string $name,
         public ?string $as = null,
+        public ?string $comment = null,
     ) {}
 
     public function value(): string
@@ -18,5 +19,10 @@ final readonly class ClassNameDto
         }
 
         return $this->name;
+    }
+
+    public function comment(): string
+    {
+        return '/** '. $this->comment .' */';
     }
 }

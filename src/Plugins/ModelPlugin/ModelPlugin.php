@@ -24,6 +24,7 @@ use GianTiaga\CodeGenerator\Columns\Fields\WYSIWYG;
 use GianTiaga\CodeGenerator\Columns\Relations\BelongsTo;
 use GianTiaga\CodeGenerator\Columns\Relations\BelongsToMany;
 use GianTiaga\CodeGenerator\Columns\Relations\HasMany;
+use GianTiaga\CodeGenerator\Dto\ClassNameDto;
 use GianTiaga\CodeGenerator\Helpers\ClassFormatter;
 use GianTiaga\CodeGenerator\Plugins\AbstractPlugin;
 use GianTiaga\CodeGenerator\Plugins\ModelPlugin\Builders\ModelColumnBuilder;
@@ -31,6 +32,7 @@ use GianTiaga\CodeGenerator\Plugins\ModelPlugin\Dto\ModelColumnDto;
 use GianTiaga\CodeGenerator\Plugins\ModelPlugin\Views\ModelsView;
 use GianTiaga\CodeGenerator\Renderers\Renderer;
 use GianTiaga\CodeGenerator\Types\ArgumentTypes\Str;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ModelPlugin extends AbstractPlugin
 {
@@ -43,6 +45,18 @@ class ModelPlugin extends AbstractPlugin
             $modelBuilder = $table->getModelBuilder();
             if (! $modelBuilder) {
                 continue;
+            }
+            $modelName = ClassFormatter::getModelNameFromTableName($table->getName());
+
+            if ($table->getFactoryBuilder()) {
+                $modelBuilder->addImport(
+                    new ClassNameDto('\Database\Factories\\'.$modelName.'Factory'),
+                );
+
+                $modelBuilder->addUse(new ClassNameDto(
+                    HasFactory::class,
+                    comment: '@use HasFactory<'.$modelName.'Factory>',
+                ));
             }
 
             $columns = $this->makeColumnsFromTable($table);
